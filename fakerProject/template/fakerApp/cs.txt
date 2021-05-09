@@ -1,0 +1,165 @@
+def load_data():
+    print('Loading data from file...')
+    import csv
+    fp=open("sample.csv","r")
+    r=csv.reader(fp)
+    data=list(r)
+    l=[]
+    for i in data:
+         l.append(i.pop(0))
+    d = dict(zip(l, data))
+    for i,j in d.items():
+       print(i,j)
+    return
+
+
+def display_data():
+    print('Displaying data...')
+    import csv
+    fp=open("sample.csv","r")
+    r=csv.reader(fp)
+    data=list(r)
+    l=[]
+    for i in data:
+         l.append(i.pop(0))
+    d = dict(zip(l, data))
+    for i,j in d.items():
+       print(i)
+       print("-------------")
+       print(j)
+    fp.close()
+    
+    return
+
+
+def rename_set():
+    print('Renaming set...')
+    import csv
+    fp=open("sample.csv","r")
+    r=csv.reader(fp)
+    data=list(r)
+    l=[]
+    for i in data:
+         l.append(i.pop(0))
+    d = dict(zip(l, data))
+    def fun(n):
+     new=n1
+     d[new]=d.pop(n)
+     print(d)
+    print("which set do you want to rename")
+    print("Rainfall")
+    print("Age")
+    print("Odometer Reading")
+    n=input("")
+    print("enter new name")
+    n1=input("")
+    fun(n)
+    return
+
+
+def sort_set():
+    print('Sorting set...')
+    import csv
+    import statistics
+    fp=open("sample.csv","r")
+    r=csv.reader(fp)
+    data=list(r)
+    l=[]
+    for i in data:
+         l.append(i.pop(0))
+    d = dict(zip(l, data))
+    l1=[]
+    def fun(n):
+       r=(d[n])
+       for i in r:
+          l1.append(int(i))
+       print(sorted(l1))
+    print("which set do you want to sort")
+    print("Rainfall")
+    print("Age")
+    print("Odometer Reading")
+    n=input("")
+    fun(n)
+       
+    return
+
+
+def analyze_set():
+    print('Analyzing the set...')
+    import csv
+    import statistics
+    fp=open("sample.csv","r")
+    r=csv.reader(fp)
+    data=list(r)
+    l=[]
+    for i in data:
+         l.append(i.pop(0))
+    d = dict(zip(l, data))
+    l1=[]
+    def fun(n):
+       r=(d[n])
+       for i in r:
+           l1.append(int(i))
+       n=len(l1)
+       print("number of values(n):",n)
+       m=(min(l1))
+       print("minimum:",m)
+       m1=(max(l1))
+       print("maximum:",m1)
+       m2=(statistics.mean(l1))
+       print("mean:",m2)
+       m3=(statistics.median(l1))
+       print("median:",m3)
+       m4=(statistics.mode(l1))
+       print("mode:",m4)
+       m5=(statistics.stdev(l1))
+       print("standard deviation:",m5)
+    print("which set do you want to analyse")
+    print("Rainfall")
+    print("Age")
+    print("Odometer Reading")
+    n=input("")
+    fun(n)
+
+
+
+    return
+
+
+def get_valid_option():
+    x = input()
+    x = int(x)
+    while x < 1 or x > 6:
+        print('Invalid option!! Please choose any among 1 to 6.')
+        x = input()
+        x = int(x)
+
+    return x
+
+
+print('Welcome to The Smart Statistician!')
+print('Programmed by XYZ\n')
+
+while True:
+    print('Please choose from the following options:')
+    print('\t1 - Load data from a file')
+    print('\t2 - Display the data to the screen')
+    print('\t3 - Rename a set')
+    print('\t4 - Sort a set')
+    print('\t5 - Analyze a set')
+    print('\t6 - Quit')
+
+    option = get_valid_option()
+
+    if option == 1:
+        load_data()
+    elif option == 2:
+        display_data()
+    elif option == 3:
+        rename_set()
+    elif option == 4:
+        sort_set()
+    elif option == 5:
+        analyze_set()
+    elif option == 6:
+        quit()

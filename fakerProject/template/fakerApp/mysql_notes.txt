@@ -1,0 +1,154 @@
+1) how to create a database
+   
+create database student_deatil;
+Query OK, 1 row affected (0.1292 sec)
+----------------------------------------------------------------------
+2) how to see all the databasese created
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| student_deatil     |
+| student_detail     |
+| student_details    |
+| sys                |
+| world              |
++--------------------+
+9 rows in set (0.0013 sec)
+---------------------------------------------------------------------------
+3) how to drop/delete a database
+   
+   drop database student_details;
+   +--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sakila             |
+| student_deatil     |
+| student_detail     |
+| sys                |
+| world              |
++--------------------+
+----------------------------------------------------------------------------
+4) how to use a created database or see which database is being used
+    select database();-to see which data is used
+     
+    use student_detail;-to use the data base
+-----------------------------------------------------------------------
+5) create a table name student which has the following attributes:
+   id,first name,last name,city(char),age,date of joining,result which can      be pass or fail, awaited(defalut)
+   see if the table is created and also check the description of the table
+
+   CREATE TABLE STUDENT(
+ID INT UNSIGNED NOT NULL  AUTO_INCREMENT PRIMARY KEY ,
+FIRST_NAME VARCHAR(20) NOT NULL,
+LAST_NAME VARCHAR(20) NOT NULL,
+CITY CHAR(20) NOT NULL,
+AGE INT UNSIGNED NOT NULL,
+DATE_OF_JOINING DATE NOT NULL,
+RESULT ENUM('YES','NO','AWAITED') DEFAULT 'AWAITED'
+);
+  
+to see table
++--------------------------+
+| Tables_in_student_detail |
++--------------------------+
+| student                  |
++--------------------------+
+1 row in set (0.0018 sec)
+
+
+to see the content
+  +-----------------+----------------------------+------+-----+---------+----------------+
+| Field           | Type                       | Null | Key | Default | Extra          |
++-----------------+----------------------------+------+-----+---------+----------------+
+| ID              | int unsigned               | NO   | PRI | NULL    | auto_increment |
+| FIRST_NAME      | varchar(20)                | NO   |     | NULL    |                |
+| LAST_NAME       | varchar(20)                | NO   |     | NULL    |                |
+| CITY            | char(20)                   | NO   |     | NULL    |                |
+| AGE             | int unsigned               | NO   |     | NULL    |                |
+| DATE_OF_JOINING | date                       | NO   |     | NULL    |                |
+| RESULT          | enum('YES','NO','AWAITED') | YES  |     | AWAITED |                |
++-----------------+----------------------------+------+-----+---------+----------------+
+7 rows in set (0.0036 sec)
+-------------------------------------------------------------------------------------------------------------
+
+6) create a table named degree which has the following attributes:
+   degree id,coures name ,length of the course(greater than or equal to 3 )    and fee
+
+ CREATE TABLE DEGREE(
+DEGREE_ID INT UNSIGNED NOT NULL PRIMARY KEY,
+COURSE_NAME VARCHAR(20) NOT NULL,
+COURSE_LENGTH INT CHECK(COURSE_LENGTH>3),
+FEE INT UNSIGNED NOT NULL
+)AUTO_INCREMENT 5000;
+---------------------------------------------------------------------------------------------------
+7) rename the attributes date of joininig to admission date
+  
+   ALTER  TABLE STUDENT  CHANGE DATE_OF_JOINING ADMISSION_DATE DATE;
+   
+   +----------------+----------------------------+------+-----+---------+----------------+
+| Field          | Type                       | Null | Key | Default | Extra          |
++----------------+----------------------------+------+-----+---------+----------------+
+| ID             | int unsigned               | NO   | PRI | NULL    | auto_increment |
+| FIRST_NAME     | varchar(20)                | NO   |     | NULL    |                |
+| LAST_NAME      | varchar(20)                | NO   |     | NULL    |                |
+| CITY           | char(20)                   | NO   |     | NULL    |                |
+| AGE            | int unsigned               | NO   |     | NULL    |                |
+| ADMISSION_DATE | date                       | YES  |     | NULL    |                |
+| RESULT         | enum('YES','NO','AWAITED') | YES  |     | AWAITED |                |
++----------------+----------------------------+------+-----+---------+----------------+
+7 rows in set (0.1397 sec)
+----------------------------------------------------------------------------------------------------
+8) chane the datatype of city in student tabel from char to varchar
+  
+   ALTER TABLE STUDENT MODIFY CITY VARCHAR(20) NOT NULL;
+ 
+  +----------------+----------------------------+------+-----+---------+----------------+
+| Field          | Type                       | Null | Key | Default | Extra          |
++----------------+----------------------------+------+-----+---------+----------------+
+| ID             | int unsigned               | NO   | PRI | NULL    | auto_increment |
+| FIRST_NAME     | varchar(20)                | NO   |     | NULL    |                |
+| LAST_NAME      | varchar(20)                | NO   |     | NULL    |                |
+| CITY           | varchar(20)                | NO   |     | NULL    |                |
+| AGE            | int unsigned               | NO   |     | NULL    |                |
+| ADMISSION_DATE | date                       | YES  |     | NULL    |                |
+| RESULT         | enum('YES','NO','AWAITED') | YES  |     | AWAITED |                |
++----------------+----------------------------+------+-----+---------+----------------+
+7 rows in set (0.0432 sec)
+--------------------------------------------------------------------------------------------------------------
+
+9) in degree tabel change the name of course name to degree name
+   
+   ALTER TABLE DEGREE CHANGE COURSE_NAME  DEGREE_NAME VARCHAR(20) NOT NULL;
+ 
+   +---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| DEGREE_ID     | int unsigned | NO   | PRI | NULL    |       |
+| DEGREE_NAME   | varchar(20)  | NO   |     | NULL    |       |
+| COURSE_LENGTH | int          | YES  |     | NULL    |       |
+| FEE           | int unsigned | NO   |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+4 rows in set (0.1578 sec)
+--------------------------------------------------------------------------------------------------------------------
+10) change the name of degree tabel to degree_detail and student table to  student data
+  
+   ALTER TABLE STUDENT RENAME STUDENT_DATA;
+  
+   ALTER TABLE DEGREE RENAME DEGREE_DATA;
+
+   
+   +--------------------------+
+| Tables_in_student_detail |
++--------------------------+
+| degree_data              |
+| student_data             |
++--------------------------+
+2 rows in set (0.1149 sec)
